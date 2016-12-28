@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main.css?v=1.0?v=1.0" />
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
+    <script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=您申请的key值&plugin=AMap.ToolBar"></script>
+    <script>
+        function init() {
+            var map = new AMap.Map("container", {
+                resizeEnable: true,
+                zoom: 13,
+                center: [113.665412, 34.757975]
+            });
+
+            //为地图注册click事件获取鼠标点击出的经纬度坐标
+            var clickEventListener = map.on('click', function (e) {
+                document.getElementById("lnglat").value = e.lnglat.getLng() + ',' + e.lnglat.getLat()
+            });
+
+            var polygon1 = (function () {
+                var arr = [ //构建多边形经纬度坐标数组
+                    [113.612361, 34.809969],
+                    [113.639581, 34.770364],
+                    [113.710471, 34.775082],
+                    [113.701196, 34.809484]
+                ]
+                return new AMap.Polygon({
+                    map: map,
+                    path: arr,
+                    strokeColor: "#0099FF",
+                    strokeOpacity: 1,
+                    strokeWeight: 2,
+                    fillColor: "#FF6600",
+                    fillOpacity: 0.35
+                });
+            })();
+
+            var polygon2 = (function () {
+                var arr = [ //构建多边形经纬度坐标数组
+                    [113.705058, 34.808841],
+                    [113.728968, 34.762533],
+                    [113.682153, 34.739195],
+                    [113.784628, 34.736579],
+                    [113.756814, 34.78411]
+                ]
+                return new AMap.Polygon({
+                    map: map,
+                    path: arr,
+                    strokeColor: "#0099FF",
+                    strokeOpacity: 1,
+                    strokeWeight: 2,
+                    fillColor: "#FF6600",
+                    fillOpacity: 0.35
+                });
+            })();
+
+            markerA = new AMap.Marker({
+                map: map,
+                position: [113.612361, 34.809969],
+                label: { content: "A", offset: new AMap.Pixel(2, -22) }
+            })
+            markerB = new AMap.Marker({
+                map: map,
+                position: [113.710471, 34.775082],
+                label: { content: "B", offset: new AMap.Pixel(2, -22) }
+            })
+            markerC = new AMap.Marker({
+                map: map,
+                position: [113.705058, 34.808841],
+                label: { content: "C", offset: new AMap.Pixel(2, -22) }
+            })
+            markerD = new AMap.Marker({
+                map: map,
+                position: [113.682153, 34.739195],
+                label: { content: "D", offset: new AMap.Pixel(2, -22) }
+            })
+            markerE = new AMap.Marker({
+                map: map,
+                position: [113.756814, 34.78411],
+                label: { content: "E", offset: new AMap.Pixel(2, -22) }
+            })
+            markerF = new AMap.Marker({
+                map: map,
+                position: [113.720639, 34.770524],
+                label: { content: "F", offset: new AMap.Pixel(2, -22) }
+            })
+            markerG = new AMap.Marker({
+                map: map,
+                position: [113.672282, 34.787513],
+                label: { content: "G", offset: new AMap.Pixel(2, -22) }
+            })
+            markerH = new AMap.Marker({
+                map: map,
+                position: [113.744637, 34.762767],
+                label: { content: "H", offset: new AMap.Pixel(2, -22) }
+            })
+
+            map.setFitView();
+        }
+
+    </script>
+</head>
+<body onload="init()">
+    <div id="container"></div>
+    <div id="myPageTop">
+        <table>
+            <tr>
+                <td class="column2">
+                    <label>左击获取经纬度：</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="column2">
+                    <input type="text" readonly id="lnglat">
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
